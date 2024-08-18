@@ -1,8 +1,10 @@
-
+import FormC from "../components/FormC"
 
 const RegisterPage = () => {
   return (
-    <div>RegisterPage</div>
+    <>
+    <FormC />
+    </>
   )
 }
 
