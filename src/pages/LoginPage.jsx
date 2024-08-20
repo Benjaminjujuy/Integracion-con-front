@@ -1,7 +1,8 @@
 import { Container } from "react-bootstrap"
 import FormC from "../components/FormC"
 
-const RegisterPage = () => {
+
+const LoginPage = () => {
   return (
     <>
     <Container className="d-flex justify-content-center my-5">
@@ -11,4 +12,4 @@ const RegisterPage = () => {
   )
 }
 
-export default RegisterPage
+export default LoginPage
