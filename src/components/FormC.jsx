@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const FormC = () => {
-  const [formRegister, setFormRegister] = useEffect({})
+  const [formRegister, setFormRegister] = useState({})
 
   const handleChangeRegister = (ev) => {
     setFormRegister({...formRegister, [ev.target.name]: ev.target.value})
@@ -41,7 +41,7 @@ const FormC = () => {
       <Form.Control type="password" placeholder="Password" name='reContrasenia'onChange={handleChangeRegister}/>
     </Form.Group>
 
-    <Button variant="primary" type="submit">
+    <Button variant="primary" type="submit" onClick={handleClickRegister}>
       Enviar
     </Button>
   </Form>

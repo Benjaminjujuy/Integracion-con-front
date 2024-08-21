@@ -15,6 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     obtenerProducto()
   }, [])
+  
   return (
     <>
       <CarrouselC />
