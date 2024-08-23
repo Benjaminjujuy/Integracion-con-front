@@ -1,7 +1,7 @@
-import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card';
 
-const CardsC = ({titulo, descripcion, precio, imagen }) => {
+const CardsC = ({idProducto, titulo, descripcion, precio, imagen }) => {
   return (
     <Card style={{ width: '18rem' }}>
     <Card.Img variant="top" src={imagen} />
@@ -13,7 +13,7 @@ const CardsC = ({titulo, descripcion, precio, imagen }) => {
       <Card.Text>
         {precio}
       </Card.Text>
-      <Button variant="primary">Ver mas</Button>
+      <Link to={`/product/${idProducto}`} className='btn btn-primary'>Ver mas</Link>
     </Card.Body>
   </Card>
   )

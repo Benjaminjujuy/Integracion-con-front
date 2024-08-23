@@ -24,7 +24,7 @@ const HomePage = () => {
              {
                productos.map((producto) => 
                <Col key={producto._id} sm='12' md='6' lg='4'>
-               <CardsC titulo={producto.nombre} descripcion={producto.descripcion} precio={producto.precio}
+               <CardsC idProducto={producto._id}titulo={producto.nombre} descripcion={producto.descripcion} precio={producto.precio}
                imagen={producto.imagen}/>
                </Col>
                )
