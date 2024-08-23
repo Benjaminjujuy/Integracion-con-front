@@ -16,6 +16,7 @@ const NavbarC = () => {
           <Nav className="me-auto">
             <NavLink to="/" className={'nav-link'}>Inicio</NavLink>
            {
+            
             rol !== 'admin'
             ?
             <>
