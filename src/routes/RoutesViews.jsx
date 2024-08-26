@@ -8,6 +8,8 @@ import LoginPage from '../pages/LoginPage';
 import AdminPage from '../pages/AdminPage';
 import UserPage from '../pages/UserPage';
 import ProductPage from '../pages/ProductPage';
+import AdminUserPage from '../pages/AdminUserPage';
+import AdminProductsPage from '../pages/AdminProductsPage';
 
 const RoutesViews = () => {
   return (
@@ -17,6 +19,8 @@ const RoutesViews = () => {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/product/:idProducto' element={<ProductPage />}/>
         <Route path='/admin' element={<AdminPage />}/>
+        <Route path='/adminUsers' element={<AdminUserPage />}/>
+        <Route path='/adminProducts' element={<AdminProductsPage />}/>
         <Route path='/user' element={<UserPage />}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/login' element={<LoginPage />}/>
