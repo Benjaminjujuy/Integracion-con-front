@@ -2,13 +2,14 @@ import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import clienteAxios, { configHeaders } from '../helpers/axios';
+import clienteAxios, { configHeaders, configHeadersImagen } from '../helpers/axios';
 import { useState } from 'react';
 
 
 const TableC = ({array, idPage}) => {
   const [show, setShow] = useState(false);
   const [productInfo, setProductInfo] = useState(null)
+  const [imagen, setImagen] = useState(null)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -48,6 +49,15 @@ const TableC = ({array, idPage}) => {
     const handleClickProductInfo = async(ev) => {
       ev.preventDefault()
       const result = await clienteAxios.put(`/productos/${productInfo._id}`, productInfo, configHeaders)
+
+      if(result.status === 200){
+        if(imagen){
+          const formData = new formData()
+          formData.append('imagen', imagen)
+          const result = await clienteAxios.put(`/productos/${productInfo._id}`, formData, configHeadersImagen)
+        }
+      }
+
     }
 
   return (
@@ -108,7 +118,7 @@ const TableC = ({array, idPage}) => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Imagen</Form.Label>
-                <Form.Control type="file"  />
+                <Form.Control type="file"  onChange={(ev) => setImagen(ev.target.files[0])}/>
                 </Form.Group>
                
                <Button variant="primary" type="submit" onClick={handleClickProductInfo}>
