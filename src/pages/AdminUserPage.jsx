@@ -1,11 +1,22 @@
 import { Container } from 'react-bootstrap'
 import TableC from '../components/TableC'
+import { useEffect, useState } from 'react'
+import clienteAxios, { configHeaders } from '../helpers/axios'
 
 const AdminUserPage = () => {
+  const [users, setUsers] = useState([])
+
+  const obtenerUsuarios = async() => {
+    const result = await clienteAxios.get('usuarios', configHeaders)
+  }
+
+  useEffect(() => {
+    obtenerUsuarios()
+  }, [])
   return (
     <>
     <Container className="my-5">
-        <TableC array={products} idPage={'adminProducts'}/>
+        <TableC array={users} idPage={'adminUsers'}/>
     </Container>
     </>
   )
