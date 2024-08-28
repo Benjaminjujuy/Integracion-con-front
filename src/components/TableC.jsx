@@ -14,6 +14,8 @@ const TableC = ({array, idPage}) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const idUsuario = JSON.parse(sessionStorage.getItem('idUsuario'))
+
     const deleteProduct = async(idProduct) => {
       const confirmDeleteProduct = confirm('Estas seguro que deseas eliminar este producto?')
       if(confirmDeleteProduct){
@@ -42,6 +44,11 @@ const TableC = ({array, idPage}) => {
       setProductInfo(product)
     }
 
+    const handleInfoUser = (user) => {
+      handleShow()
+      setUserInfo(product)
+    }
+
     const handleChangeProductInfo = (ev) => {
       setProductInfo({...productInfo, [ev.target.name]: ev.target.value})
     }
@@ -66,6 +73,30 @@ const TableC = ({array, idPage}) => {
       }
 
     }
+
+    const deleteUser = async(idUser) => {
+      const confirmDeleteUser = confirm('Estas seguro que deseas eliminar este usuario?')
+      if(confirmDeleteUser){
+        const result = await clienteAxios.delete(`/usuarios/${idUser}`, configHeaders)
+      }
+    }
+
+    
+    const enableUser = async(idUser) => {
+      const confirmEnableUser = confirm('Estas seguro que deseas habilitar este usuario?')
+
+      if(confirmEnableUser){
+          const result = await clienteAxios.put(`/usuarios/habilitar/${idUser}`, {}, configHeaders)
+      }    
+  }
+
+  const disabledUser = async(idUser) => {
+      const confirmDisabledUser = confirm('Estas seguro que deseas deshabilitar este usuario?')
+
+      if(confirmDisabledUser){
+          const result = await clienteAxios.put(`/usuarios/deshabilitar/${idUser}`, {}, configHeaders)
+      }    
+  }
 
   return (
     <Table striped bordered hover>
@@ -153,13 +184,14 @@ const TableC = ({array, idPage}) => {
               <tbody>
                {
                 array.map((user) => 
+                  user.id !== idUsuario &&
                    <tr key={user._id}>
                    <td>{user._id}</td>
                    <td>{user.nombreUsuario}</td>
                    <td>{user.role}</td>
                    <td className='d-flex justify-content-evenly'>
                  <>
-                   <Button variant="warning" onClick={() => handleInfoProduct(user)}>
+                   <Button variant="warning" onClick={() => handleInfoUser(user)}>
                       Editar
                    </Button>
         
@@ -171,14 +203,14 @@ const TableC = ({array, idPage}) => {
                    <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                      <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="text" name='nombre' value={productInfo?.nombre}
-                       onChange={(ev) => handleChangeProductInfo(ev)}/>
+                    <Form.Control type="text" name='nombre' value={userInfo?.nombreUsuario}
+                       onChange={(ev) => handleChangeUserInfo(ev)}/>
                    </Form.Group>
         
                    <Form.Group className="mb-3" controlId="formBasicPassword">
                      <Form.Label>Rol</Form.Label>
-                    <Form.Control type="number" name='precio' value={productInfo?.precio}
-                      onChange={(ev) => handleChangeProductInfo(ev)}/>
+                    <Form.Control type="number" name='precio' value={userInfo?.rol}
+                      onChange={(ev) => handleChangeUserInfo(ev)}/>
                     </Form.Group>
                        
                    <Button variant="primary" type="submit" onClick={handleClickProductInfo}>
@@ -190,9 +222,9 @@ const TableC = ({array, idPage}) => {
                    </Modal.Body>
                      </Modal>
                  </>
-                    <Button variant='danger' onClick={() => deleteProduct(user._id)}>Eliminar</Button>
+                    <Button variant='danger' onClick={() => deleteUser(user._id)}>Eliminar</Button>
                      <Button variant={user.bloqueado ? 'succes' : 'info'} onClick={() => user.bloqueado ? 
-                     enableProduct(user._id) : disabledProduct(user._id)}>{
+                     enableUser(user._id) : disabledUser(user._id)}>{
                      product.bloqueado ? 'Habilitar' : 'Bloquear'}</Button>
                   </td>
               </tr>

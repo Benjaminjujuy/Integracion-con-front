@@ -7,12 +7,14 @@ const AdminUserPage = () => {
   const [users, setUsers] = useState([])
 
   const obtenerUsuarios = async() => {
-    const result = await clienteAxios.get('usuarios', configHeaders)
+    const result = await clienteAxios.get('/usuarios', configHeaders)
+    setUsers(result.data.usuarios)
   }
 
   useEffect(() => {
     obtenerUsuarios()
   }, [])
+  
   return (
     <>
     <Container className="my-5">

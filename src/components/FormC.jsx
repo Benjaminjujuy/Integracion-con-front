@@ -59,6 +59,8 @@ const FormC = ({idPage}) => {
       alert(`${result.data.msg}`)
       sessionStorage.setItem('token', JSON.stringify(result.data.token))
       sessionStorage.setItem('rol', JSON.stringify(result.data.rol))
+      sessionStorage.setItem('idUsuario', JSON.stringify(result.data.idUsuario))
+
       if(result.data.rol === 'usuario'){
         setTimeout(() => {
           navigate('/user')
