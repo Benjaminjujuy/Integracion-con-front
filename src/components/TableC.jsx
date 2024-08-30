@@ -46,11 +46,15 @@ const TableC = ({array, idPage}) => {
 
     const handleInfoUser = (user) => {
       handleShow()
-      setUserInfo(product)
+      setUserInfo(user)
     }
 
     const handleChangeProductInfo = (ev) => {
       setProductInfo({...productInfo, [ev.target.name]: ev.target.value})
+    }
+
+    const handleChangeUserInfo = (ev) => {
+      setUsernfo({...userInfo, [ev.target.name]: ev.target.value})
     }
 
     const handleClickProductInfo = async(ev) => {
@@ -96,6 +100,21 @@ const TableC = ({array, idPage}) => {
       if(confirmDisabledUser){
           const result = await clienteAxios.put(`/usuarios/deshabilitar/${idUser}`, {}, configHeaders)
       }    
+  }
+
+  const handleClickUserInfo =async(ev) => {
+    ev.preventDefault()
+
+    if(userInfo.rol !== 'admin' && userInfo.rol !== 'usuario'){
+      return alert('ERROR. Rol permitido: USUARIO o ADMIN')
+    }
+
+      const result = await clienteAxios.put(`/usuarios/${userInfo._id}`, userInfo, configHeaders)
+
+      if(result.status === 200){
+        alert(`${result.data.msg}`)
+        handleClose()
+      }
   }
 
   return (
@@ -147,7 +166,7 @@ const TableC = ({array, idPage}) => {
               <Form>
              <Form.Group className="mb-3" controlId="formBasicEmail">
              <Form.Label>Nombre</Form.Label>
-             <Form.Control type="text" name='nombre' value={productInfo?.nombre}
+             <Form.Control type="text" name='nombreUsuario' value={productInfo?.nombre}
                onChange={(ev) => handleChangeProductInfo(ev)}/>
              </Form.Group>
         
@@ -209,11 +228,11 @@ const TableC = ({array, idPage}) => {
         
                    <Form.Group className="mb-3" controlId="formBasicPassword">
                      <Form.Label>Rol</Form.Label>
-                    <Form.Control type="number" name='precio' value={userInfo?.rol}
+                    <Form.Control type="text" name='rol' value={userInfo?.rol}
                       onChange={(ev) => handleChangeUserInfo(ev)}/>
                     </Form.Group>
                        
-                   <Button variant="primary" type="submit" onClick={handleClickProductInfo}>
+                   <Button variant="primary" type="submit" onClick={handleClickUserInfo}>
                         Guardar cambios
                    </Button>
                     </Form>

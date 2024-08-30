@@ -40,11 +40,19 @@ const ProductPage = () => {
 
   return (
    <>
-   <img src={`${product?.data?.producto}`} alt="" />
-   <p></p>
-   <p></p>
+    <div className="d-flex my-5 justify-content-center align-items-centr text-center">
+    <div className="mx-3">
+   <img src={`${product?.imagen}`} alt="" />
+   </div>
+
+   <div>
+   <p>${product.nombre}</p>
+   <p>{product.descripcion}</p>
+   <p>${product.precio}</p>
    <Button variant="primary" onClick={handleAddProdFav}>Añadir a favorito</Button>
    <Button variant="secondary" onClick={handleAddProdCart}>Añadir a carrito</Button>
+   </div>
+    </div>
    </>
   )
 }

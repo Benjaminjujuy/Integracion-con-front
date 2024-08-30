@@ -36,8 +36,8 @@ const NavbarC = () => {
             <>
              <NavLink to="about" className={'nav-link'}>Sobre Nosotros</NavLink>
              <NavLink to="contact" className={'nav-link'}>Contacto</NavLink>
-             <NavLink to="about" className={'nav-link'}>Favoritos</NavLink>
-             <NavLink to="contact" className={'nav-link'}>Carrito</NavLink>
+             <NavLink to="user-fav" className={'nav-link'}>Favoritos</NavLink>
+             <NavLink to="user-cart" className={'nav-link'}>Carrito</NavLink>
            </>
            :
             <>
