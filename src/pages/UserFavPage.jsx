@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import clienteAxios, { configHeaders } from "../helpers/axios"
-import { Container, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
+import CardsC from "../components/CardsC"
 
 
 const UserFavPage = () => {
@@ -16,15 +17,18 @@ const UserFavPage = () => {
     }, [])
 
   return (
-   <>
     <Container>
         <Row>
            {
-            
+            favs.map((product) => 
+            <Col>
+             <CardsC idProducto={product._id} titulo={product.nombre} descripcion={product.descripcion} 
+             precio={product.precio} imagen={product.imagen} idPage={'favs'}/>
+            </Col>
+            )
            }
         </Row>
     </Container>
-   </>
   )
 }
 
