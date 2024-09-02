@@ -117,11 +117,15 @@ const TableC = ({array, idPage}) => {
       }
   }
 
+const deleteProductCartUser = () => {
+  
+}
+
   return (
     <Table striped bordered hover>
       <thead>
          {
-            idPage === 'adminProducts'
+            idPage === 'adminProducts' || idPage === 'userCart'
             ?
             <tr>
             <th>ID</th>
@@ -140,7 +144,7 @@ const TableC = ({array, idPage}) => {
          }
       </thead>
        {
-         idPage === 'adminProducts'
+         idPage === 'adminProducts' || idPage === 'userCart'
          ?
       <tbody>
          {
@@ -209,7 +213,10 @@ const TableC = ({array, idPage}) => {
                    <td>{user.nombreUsuario}</td>
                    <td>{user.role}</td>
                    <td className='d-flex justify-content-evenly'>
-                 <>
+                 {
+                  idPage === "adminProducts"
+                  ?
+                  <>
                    <Button variant="warning" onClick={() => handleInfoUser(user)}>
                       Editar
                    </Button>
@@ -237,14 +244,18 @@ const TableC = ({array, idPage}) => {
                    </Button>
                     </Form>
         
-        
                    </Modal.Body>
                      </Modal>
-                 </>
+                 
                     <Button variant='danger' onClick={() => deleteUser(user._id)}>Eliminar</Button>
                      <Button variant={user.bloqueado ? 'succes' : 'info'} onClick={() => user.bloqueado ? 
                      enableUser(user._id) : disabledUser(user._id)}>{
-                     product.bloqueado ? 'Habilitar' : 'Bloquear'}</Button>
+                     product.bloqueado ? 'Habilitar' : 'Bloquear'}
+                     </Button>
+                     </>
+                     :
+                     <Button variant='danger' onClick={() => deleteProductCartUser(user._id)}>Eliminar</Button>
+                 }
                   </td>
               </tr>
               )

@@ -17,11 +17,11 @@ const UserFavPage = () => {
     }, [])
 
   return (
-    <Container>
+    <Container className="my-5">
         <Row>
            {
             favs.map((product) => 
-            <Col>
+            <Col key={product._id}>
              <CardsC idProducto={product._id} titulo={product.nombre} descripcion={product.descripcion} 
              precio={product.precio} imagen={product.imagen} idPage={'favs'}/>
             </Col>
