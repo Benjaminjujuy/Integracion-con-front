@@ -117,9 +117,12 @@ const TableC = ({array, idPage}) => {
       }
   }
 
-const deleteProductCartUser = () => {
-  
-}
+  const handleClickDelCart = async(idProduct) => {
+    const confirmDelProductCart = confirm(`Estas seguro que deseas eliminar este producto del carrito?`)
+    if(confirmDelProductCart){
+      const result = await clienteAxios.delete(`/productos/borrarProdCart/${idProduct}`, configHeaders)
+    }
+  }
 
   return (
     <Table striped bordered hover>
@@ -157,7 +160,10 @@ const deleteProductCartUser = () => {
              <img src={product.imagen} alt="" width={'50'}/>
              </td>
              <td className='d-flex justify-content-evenly'>
-          <>
+             {
+              idPage === 'adminProducts'
+              ?
+             <>
             <Button variant="warning" onClick={() => handleInfoProduct(product)}>
               Editar
             </Button>
@@ -190,15 +196,17 @@ const deleteProductCartUser = () => {
                </Button>
                </Form>
         
-        
                </Modal.Body>
                </Modal>
-             </>
-               <Button variant='danger' onClick={() => deleteProduct(product._id)}>Eliminar</Button>
+             
                <Button variant={product.bloqueado ? 'succes' : 'info'} onClick={() => product.bloqueado ? 
                 enableProduct(product._id) : disabledProduct(product._id)}>{
                  product.bloqueado ? 'Habilitar' : 'Bloquear'}</Button>
-                </td>
+                </>
+                : 
+                <Button variant='danger' onClick={() => handleClickDelCart(product._id)}>Eliminar</Button>
+             }
+              </td>
              </tr>
               )
             }
@@ -213,10 +221,7 @@ const deleteProductCartUser = () => {
                    <td>{user.nombreUsuario}</td>
                    <td>{user.role}</td>
                    <td className='d-flex justify-content-evenly'>
-                 {
-                  idPage === "adminProducts"
-                  ?
-                  <>
+                   <>
                    <Button variant="warning" onClick={() => handleInfoUser(user)}>
                       Editar
                    </Button>
@@ -252,10 +257,9 @@ const deleteProductCartUser = () => {
                      enableUser(user._id) : disabledUser(user._id)}>{
                      product.bloqueado ? 'Habilitar' : 'Bloquear'}
                      </Button>
-                     </>
-                     :
+                     
                      <Button variant='danger' onClick={() => deleteProductCartUser(user._id)}>Eliminar</Button>
-                 }
+                   </>            
                   </td>
               </tr>
               )
